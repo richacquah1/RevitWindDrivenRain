@@ -11,7 +11,7 @@
 - **Archived release (Zenodo):** https://doi.org/10.5281/zenodo.17678839
 - **License:** MIT (see [LICENSE](LICENSE))
 
-The Zenodo archive is intended to serve as the permanent, versioned record of the software. Once a matching GitHub release/tag is published, it should correspond to the same source snapshot as the archived version.
+The Zenodo record identifies the archived software version as **v1**. For clear version provenance, a GitHub release tagged `v1` should identify the repository snapshot containing the corresponding software distribution and link to the Zenodo record above. The tag must not be reused for later source changes; subsequent versions should receive new tags and their own archived records.
 
 ## Main purpose
 
