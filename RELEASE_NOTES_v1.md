@@ -1,22 +1,32 @@
-# RevitWindDrivenRain v1 — Release notes
+# RevitWindDrivenRain v1
 
-This release is intended to identify the v1 distribution of RevitWindDrivenRain in the GitHub repository.
+Initial tagged GitHub release for the RevitWindDrivenRain software distribution.
 
-## Package
+## Contents
 
-- Repository package: [RevitWindDrivenRain.zip](https://github.com/richacquah1/RevitWindDrivenRain/blob/main/RevitWindDrivenRain.zip)
-- Archived software record: https://doi.org/10.5281/zenodo.17678839
-- Licence specified by the GitHub repository: MIT
+- `RevitWindDrivenRain.zip` — project archive committed to this repository
+- `README.md` — requirements, dependency restoration, build and installation guidance
+- `LICENSE` — MIT License
 
-## Target environment
+## Archived version and citation
+
+The versioned Zenodo software record is available at https://doi.org/10.5281/zenodo.17678839. Cite that archived record when using the software:
+
+Acquah, R., Niklewski, J., & Sandak, J. (2025). *RevitWindDrivenRain* [Software]. Zenodo. https://doi.org/10.5281/zenodo.17678839
+
+Associated research publication:
+
+Acquah, R., Niklewski, J., & Sandak, J. (2026). *BIM-based wind-driven rain modelling using ISO 15927-3 and geometry-based exposure*. *Building and Environment, 295*, 114447. https://doi.org/10.1016/j.buildenv.2026.114447
+
+## Target environment and limitations
 
 - Windows
 - Autodesk Revit 2023
-- .NET Framework target as specified by the source project
-- Autodesk Revit API assemblies and any project-declared dependencies
+- The .NET Framework target declared by the project
+- Autodesk Revit API assemblies and the project's declared dependencies
 
-Compatibility with other Revit versions has not been established through testing. Native macOS support is not provided. See the [README](https://github.com/richacquah1/RevitWindDrivenRain/blob/main/README.md) for package restoration, build, and installation guidance.
+Compatibility with other Revit versions has not been established through testing. Native macOS support is not provided. See the README for dependency-restoration and installation guidance.
 
-## Version provenance
+## Licence
 
-Before publishing this release, verify that the ZIP contains the same software source snapshot as the archived Zenodo v1 record. The GitHub tag should point to the repository commit containing that exact distribution. Do not describe the two records as corresponding versions unless this comparison has been completed.
+MIT License.
