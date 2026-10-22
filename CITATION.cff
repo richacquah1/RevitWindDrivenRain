@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the archived Zenodo release and the associated publication."
+title: "RevitWindDrivenRain"
+type: software
+authors:
+  - family-names: "Acquah"
+    given-names: "Richard"
+  - family-names: "Niklewski"
+    given-names: "Jonas"
+  - family-names: "Sandak"
+    given-names: "Jakub"
+repository-code: "https://github.com/richacquah1/RevitWindDrivenRain"
+url: "https://doi.org/10.5281/zenodo.17678839"
+license: MIT
