@@ -1,0 +1,31 @@
+{
+  "title": "RevitWindDrivenRain",
+  "description": "An Autodesk Revit add-in for geometry-resolved wind-driven rain exposure assessment on building façades, combining building geometry with a trajectory-based assessment approach informed by ISO 15927-3.",
+  "creators": [
+    {
+      "name": "Acquah, Richard"
+    },
+    {
+      "name": "Niklewski, Jonas"
+    },
+    {
+      "name": "Sandak, Jakub"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "wind-driven rain",
+    "building information modelling",
+    "BIM",
+    "Autodesk Revit",
+    "façade exposure",
+    "ISO 15927-3"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://doi.org/10.1016/j.buildenv.2026.114447",
+      "relation": "isSupplementTo",
+      "scheme": "doi"
+    }
+  ]
+}
