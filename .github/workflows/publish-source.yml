@@ -122,7 +122,7 @@ jobs:
             RevitWindDrivenRain.addin RevitWindDrivenRain.csproj RevitWindDrivenRain.sln \
             NewWoodLCC.txt "NewWoodLCC - Copy.txt" SLE_PopupForm_Backup.cs \
             SetProjectLocation_Backup.cs packages.config packages.config.new.20240425104046 \
-            .editorconfig .gitattributes .gitignore README.md source
+            .editorconfig .gitattributes .gitignore README.md
           if git diff --cached --quiet; then
             echo "No source changes to commit."
             exit 0
