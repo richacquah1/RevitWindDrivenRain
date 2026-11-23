@@ -2,7 +2,7 @@
 
 **RevitWindDrivenRain** is an Autodesk Revit add-in for geometry-resolved wind-driven rain (WDR) exposure assessment on building façades. It is designed to combine building geometry with a trajectory-based method to estimate and visualise spatial differences in façade exposure, within a workflow informed by ISO 15927-3.
 
-> **Source availability:** The Visual Studio source project is now available as browsable files in [source/RevitWindDrivenRain](source/RevitWindDrivenRain/). The original ZIP archive is retained as the v1 software distribution.
+> **Source availability:** The Visual Studio source project is now available as browsable files in [RevitWindDrivenRain](RevitWindDrivenRain/). The original ZIP archive is retained as the v1 software distribution.
 
 ## Repository and archived release
 
@@ -15,7 +15,7 @@ The Zenodo record identifies the archived software version as **v1**. For clear 
 
 ## Source code
 
-The browsable C# and WPF/XAML project files are available in [source/RevitWindDrivenRain](source/RevitWindDrivenRain/). The solution file is [RevitWindDrivenRain.sln](source/RevitWindDrivenRain/RevitWindDrivenRain.sln). Generated Visual Studio folders and local build outputs are excluded.
+The browsable C# and WPF/XAML project files are available in [RevitWindDrivenRain](RevitWindDrivenRain/). The solution file is [RevitWindDrivenRain.sln](RevitWindDrivenRain/RevitWindDrivenRain.sln). Generated Visual Studio folders and local build outputs are excluded.
 
 ## Main purpose
 
@@ -66,7 +66,7 @@ Follow the steps in [Building from source](#building-from-source). A source proj
 A buildable Visual Studio solution/project and the required source files must be present in the archive to compile the add-in.
 
 1. Install Visual Studio with the **.NET desktop development** workload.
-2. Open [source/RevitWindDrivenRain/RevitWindDrivenRain.sln](source/RevitWindDrivenRain/RevitWindDrivenRain.sln) in Visual Studio. Alternatively, extract the ZIP archive and open the solution or project supplied there.
+2. Open [RevitWindDrivenRain/RevitWindDrivenRain.sln](RevitWindDrivenRain/RevitWindDrivenRain.sln) in Visual Studio. Alternatively, extract the ZIP archive and open the solution or project supplied there.
 3. Confirm that the target framework matches the release requirements.
 4. Set the references to `RevitAPI.dll` and `RevitAPIUI.dll` from the local Autodesk Revit 2023 installation.
 5. Restore NuGet dependencies as described below.
