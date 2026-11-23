@@ -36,7 +36,7 @@ jobs:
           # Remove the previous nested source location; the project now lives at repository root.
           import shutil
           shutil.rmtree(pathlib.Path("source/RevitWindDrivenRain"), ignore_errors=True)
-          destination = pathlib.Path("RevitWindDrivenRain")
+          destination = pathlib.Path(".")
           destination.mkdir(parents=True, exist_ok=True)
           excluded_dirs = {".vs", "bin", "obj", ".git"}
           excluded_suffixes = {".csproj.user", ".suo", ".vsidx", ".user"}
@@ -115,7 +115,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A RevitWindDrivenRain source README.md
+          git add -A -- \
+            App.config App.cs GreyscaleBitmapData.cs LICENSE.txt MaterialResistance.json \
+            "Command_Aesthetical Appearance" "Command_Ray Casting" Command_Simulations Command_WDR \
+            Forms Highlight Properties Resources Utilities "Test Codes" assets \
+            RevitWindDrivenRain.addin RevitWindDrivenRain.csproj RevitWindDrivenRain.sln \
+            NewWoodLCC.txt "NewWoodLCC - Copy.txt" SLE_PopupForm_Backup.cs \
+            SetProjectLocation_Backup.cs packages.config packages.config.new.20240425104046 \
+            .editorconfig .gitattributes .gitignore README.md source
           if git diff --cached --quiet; then
             echo "No source changes to commit."
             exit 0
