@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="RevitWindDrivenRain.WDR_User_Interface"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:RevitWindDrivenRain"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+
+
+    <UserControl.Resources>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <StackPanel Grid.ColumnSpan="2">
+            <TextBlock Text="Wind-Driven Rain Simulation Settings" 
+                       FontWeight="Bold" Padding="10" Margin="0,5,0,5"/>
+
+            <StackPanel Orientation="Horizontal" Width="268" Margin="0,5,0,5">
+                <TextBlock Text="Wind Direction (degrees):" Width="150"/>
+                <TextBox x:Name="WindDirectionTextBox" Width="100"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Width="268" Margin="0,5,0,5">
+                <TextBlock Text="Wind Speed (m/s):" Width="150"/>
+                <TextBox x:Name="WindSpeedTextBox" Width="100"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Width="268" Margin="0,5,0,5">
+                <TextBlock Text="Rainfall Intensity (mm/h):" Width="150"/>
+                <TextBox x:Name="RainfallIntensityTextBox" Width="100"/>
+            </StackPanel>
+
+            <Button x:Name="SetSectionBoxButton" Content="Set Section Box" Width="300" Margin="0,5,0,5" Click="OnSetSectionBoxButton_Click"/>
+
+
+            <CheckBox x:Name="SelectAllFacesCheckbox" Content="Select All Faces" Width="268" Margin="0,5,0,5" Checked="OnSelectAllFacesChecked"/>
+
+            <Button x:Name="SelectFaces" Content="Select Face(s)" Width="100"
+                    IsEnabled="{Binding ElementName=SelectAllFacesCheckbox, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
+                    Margin="0,5,0,5" Click="SelectFaces_Click"/>
+
+
+            <Button x:Name="RunSimulationButton" Content="Run Simulation" Width="300" Margin="0,5,0,5" Click="OnRunSimulationButton_Click"/>
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>
