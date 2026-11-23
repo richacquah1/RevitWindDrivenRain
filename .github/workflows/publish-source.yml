@@ -29,14 +29,9 @@ jobs:
           if not outer_path.is_file():
               raise SystemExit("The root release archive RevitWindDrivenRain.zip was not found.")
 
-          with zipfile.ZipFile(outer_path) as outer:
-              candidates = [
-                  n for n in outer.namelist()
-                  if n.lower().endswith("/revitwinddrivenrain.zip")
-              ]
-              if len(candidates) != 1:
-                  raise SystemExit(f"Expected one nested project ZIP; found {len(candidates)}.")
-              nested_bytes = outer.read(candidates[0])
+          # The checked-out repository already contains the project archive at its root.
+          # Do not look for another nested ZIP inside it.
+          nested_bytes = outer_path.read_bytes()
 
           destination = pathlib.Path("source/RevitWindDrivenRain")
           destination.mkdir(parents=True, exist_ok=True)
