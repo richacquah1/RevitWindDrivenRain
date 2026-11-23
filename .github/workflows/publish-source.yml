@@ -91,7 +91,7 @@ jobs:
           p = Path("README.md")
           text = p.read_text(encoding="utf-8")
           old = "> **Status and scope:** The repository includes a ZIP archive of the software project. The instructions below describe the expected workflow, but should be checked against the exact files in the archive. Compatibility has not been established for every Revit release or Windows configuration."
-          new = "> **Source availability:** The Visual Studio source project is now available as browsable files in [RevitWindDrivenRain](RevitWindDrivenRain/). The original ZIP archive is retained as the v1 software distribution."
+          new = "> **Source availability:** The Visual Studio source project is now available as browsable files in [repository root](./). The original ZIP archive is retained as the v1 software distribution."
           if old in text:
               text = text.replace(old, new)
           else:
@@ -99,10 +99,10 @@ jobs:
               if marker in text and "Source availability:" not in text:
                   text = text.replace(marker, marker + "\n\n" + new)
           build_old = "2. Extract the ZIP archive and open the supplied solution (`.sln`) or project (`.csproj`) file."
-          build_new = "2. Open [RevitWindDrivenRain/RevitWindDrivenRain.sln](RevitWindDrivenRain/RevitWindDrivenRain.sln) in Visual Studio. Alternatively, extract the ZIP archive and open the solution or project supplied there."
+          build_new = "2. Open [RevitWindDrivenRain.sln](RevitWindDrivenRain.sln) in Visual Studio. Alternatively, extract the ZIP archive and open the solution or project supplied there."
           text = text.replace(build_old, build_new)
           if "## Source code" not in text:
-              source_section = "\n## Source code\n\nThe browsable C# and WPF/XAML project files are available in [RevitWindDrivenRain](RevitWindDrivenRain/). The solution file is [RevitWindDrivenRain.sln](RevitWindDrivenRain/RevitWindDrivenRain.sln). Generated Visual Studio folders and local build outputs are excluded.\n"
+              source_section = "\n## Source code\n\nThe browsable C# and WPF/XAML project files are available in [repository root](./). The solution file is [RevitWindDrivenRain.sln](RevitWindDrivenRain.sln). Generated Visual Studio folders and local build outputs are excluded.\n"
               insert_at = text.find("\n## Main purpose")
               if insert_at >= 0:
                   text = text[:insert_at] + source_section + text[insert_at:]
