@@ -33,6 +33,9 @@ jobs:
           # Do not look for another nested ZIP inside it.
           nested_bytes = outer_path.read_bytes()
 
+          # Remove the previous nested source location; the project now lives at repository root.
+          import shutil
+          shutil.rmtree(pathlib.Path("source/RevitWindDrivenRain"), ignore_errors=True)
           destination = pathlib.Path("RevitWindDrivenRain")
           destination.mkdir(parents=True, exist_ok=True)
           excluded_dirs = {".vs", "bin", "obj", ".git"}
@@ -112,7 +115,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add RevitWindDrivenRain README.md
+          git add -A RevitWindDrivenRain source README.md
           if git diff --cached --quiet; then
             echo "No source changes to commit."
             exit 0
