@@ -2,14 +2,14 @@
 
 **RevitWindDrivenRain** is an Autodesk Revit add-in for geometry-resolved wind-driven rain (WDR) exposure assessment on building façades. It is designed to combine building geometry with a trajectory-based method to estimate and visualise spatial differences in façade exposure, within a workflow informed by ISO 15927-3.
 
-> **Source availability:** The complete Visual Studio source project is available as browsable files directly in the repository root. The original ZIP archive is retained as the v1 software distribution.
+> **Source availability:** The complete Visual Studio source project is available as browsable files in [`source/RevitWindDrivenRain/`](source/RevitWindDrivenRain/). The ZIP archive has been removed from this repository; the archived v1 release remains available through Zenodo.
 
 ## Repository and archived release
 
 - **Source repository:** https://github.com/richacquah1/RevitWindDrivenRain
-- **Visual Studio solution:** [RevitWindDrivenRain.sln](RevitWindDrivenRain.sln)
-- **Visual Studio project:** [RevitWindDrivenRain.csproj](RevitWindDrivenRain.csproj)
-- **Project ZIP:** [RevitWindDrivenRain.zip](RevitWindDrivenRain.zip)
+- **Source project folder:** [source/RevitWindDrivenRain/](source/RevitWindDrivenRain/)
+- **Visual Studio solution:** [RevitWindDrivenRain.sln](source/RevitWindDrivenRain/RevitWindDrivenRain.sln)
+- **Visual Studio project:** [RevitWindDrivenRain.csproj](source/RevitWindDrivenRain/RevitWindDrivenRain.csproj)
 - **Archived release (Zenodo):** https://doi.org/10.5281/zenodo.17678839
 - **License:** MIT (see [LICENSE](LICENSE))
 
@@ -17,18 +17,18 @@ The Zenodo record identifies the archived software version as **v1**. For clear 
 
 ## Source code
 
-The browsable C# and WPF/XAML project files are maintained directly in the repository root. The main source folders include:
+The browsable C# and WPF/XAML project files are grouped under [`source/RevitWindDrivenRain/`](source/RevitWindDrivenRain/). The main source folders include:
 
-- [WDR command implementation](Command_WDR/)
-- [Ray-casting implementation](Command_Ray%20Casting/)
-- [Simulation commands](Command_Simulations/)
-- [Forms and user interface](Forms/)
-- [Utilities](Utilities/)
-- [Resources](Resources/)
-- [Highlight components](Highlight/)
-- [Test codes](Test%20Codes/)
+- [WDR command implementation](source/RevitWindDrivenRain/Command_WDR/)
+- [Ray-casting implementation](source/RevitWindDrivenRain/Command_Ray%20Casting/)
+- [Simulation commands](source/RevitWindDrivenRain/Command_Simulations/)
+- [Forms and user interface](source/RevitWindDrivenRain/Forms/)
+- [Utilities](source/RevitWindDrivenRain/Utilities/)
+- [Resources](source/RevitWindDrivenRain/Resources/)
+- [Highlight components](source/RevitWindDrivenRain/Highlight/)
+- [Test codes](source/RevitWindDrivenRain/Test%20Codes/)
 
-The [Visual Studio solution](RevitWindDrivenRain.sln) and [project file](RevitWindDrivenRain.csproj) are also at the repository root. You can browse individual source files directly on GitHub or clone the repository to inspect and build the project. Generated Visual Studio folders and local build outputs are excluded.
+The [Visual Studio solution](source/RevitWindDrivenRain/RevitWindDrivenRain.sln) and [project file](source/RevitWindDrivenRain/RevitWindDrivenRain.csproj) are in the source folder. You can browse individual source files directly on GitHub or clone the repository to inspect and build the project. Generated Visual Studio folders and local build outputs are excluded.
 
 ## Main purpose
 
@@ -59,7 +59,7 @@ The source code is provided to support inspection, modification and adaptation t
 
 ## Installation
 
-**This release contains source code only. It does not include a precompiled add-in assembly (`.dll`) ready to install in Revit.** The ZIP archive is a source-project archive, not an installer or compiled software package.
+**This release contains source code only. It does not include a precompiled add-in assembly (`.dll`) ready to install in Revit.** No ZIP archive is distributed in this repository. The Zenodo record provides the archived v1 software release.
 
 To use the add-in, first build the source project in Visual Studio as described in [Building from source](#building-from-source). After a successful build, the resulting assembly and its dependencies must be installed and registered with Revit using a correctly configured `.addin` manifest.
 
@@ -73,10 +73,10 @@ The repository does not provide a precompiled binary, so users must have a compa
 
 ## Building from source
 
-The repository contains the browsable Visual Studio solution/project and source files required to inspect and build the add-in.
+The repository contains the browsable Visual Studio solution/project and source files under [`source/RevitWindDrivenRain/`](source/RevitWindDrivenRain/) required to inspect and build the add-in.
 
 1. Install Visual Studio with the **.NET desktop development** workload.
-2. Clone or download this repository and open [RevitWindDrivenRain.sln](RevitWindDrivenRain.sln) in Visual Studio. Alternatively, extract the ZIP archive and open the solution or project supplied there.
+2. Clone or download this repository and open [RevitWindDrivenRain.sln](source/RevitWindDrivenRain/RevitWindDrivenRain.sln) in Visual Studio.
 3. Confirm that the target framework matches the release requirements.
 4. Set the references to `RevitAPI.dll` and `RevitAPIUI.dll` from the local Autodesk Revit 2023 installation.
 5. Restore NuGet dependencies as described below.

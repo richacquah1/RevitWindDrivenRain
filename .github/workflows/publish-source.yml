@@ -1,131 +1,27 @@
-name: Publish browsable source project
+name: Validate browsable source project
 
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
+      - "source/RevitWindDrivenRain/**"
       - ".github/workflows/publish-source.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  publish-source:
+  validate-source:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Extract nested Visual Studio project
+      - name: Verify source project structure
         shell: bash
         run: |
-          python - <<'PY'
-          import io
-          import pathlib
-          import zipfile
-
-          outer_path = pathlib.Path("RevitWindDrivenRain.zip")
-          if not outer_path.is_file():
-              raise SystemExit("The root release archive RevitWindDrivenRain.zip was not found.")
-
-          # The checked-out repository already contains the project archive at its root.
-          # Do not look for another nested ZIP inside it.
-          nested_bytes = outer_path.read_bytes()
-
-          # Remove the previous nested source location; the project now lives at repository root.
-          import shutil
-          shutil.rmtree(pathlib.Path("source/RevitWindDrivenRain"), ignore_errors=True)
-          destination = pathlib.Path(".")
-          destination.mkdir(parents=True, exist_ok=True)
-          excluded_dirs = {".vs", "bin", "obj", ".git"}
-          excluded_suffixes = {".csproj.user", ".suo", ".vsidx", ".user"}
-          written = []
-          skipped = []
-
-          with zipfile.ZipFile(io.BytesIO(nested_bytes)) as project:
-              for info in project.infolist():
-                  if info.is_dir():
-                      continue
-                  raw = pathlib.PurePosixPath(info.filename)
-                  parts = list(raw.parts)
-
-                  # Remove the single project-root directory from the archive path.
-                  if parts and parts[0].lower() == "revitwinddrivenrain":
-                      parts = parts[1:]
-                  if not parts:
-                      continue
-
-                  if any(part.lower() in excluded_dirs for part in parts):
-                      skipped.append(info.filename)
-                      continue
-                  filename = parts[-1].lower()
-                  if any(filename.endswith(suffix) for suffix in excluded_suffixes):
-                      skipped.append(info.filename)
-                      continue
-
-                  relative = pathlib.PurePosixPath(*parts)
-                  target = destination.joinpath(*relative.parts)
-                  target.parent.mkdir(parents=True, exist_ok=True)
-                  target.write_bytes(project.read(info.filename))
-                  written.append(str(target))
-
-          if not any(p.endswith(".csproj") for p in written):
-              raise SystemExit("The extracted source does not contain a .csproj file.")
-          if not any(p.endswith(".sln") for p in written):
-              raise SystemExit("The extracted source does not contain a .sln file.")
-          if not any(p.endswith(".cs") for p in written):
-              raise SystemExit("No C# source files were extracted.")
-
-          print(f"Published-project files prepared: {len(written)}")
-          print(f"Excluded generated/user files: {len(skipped)}")
-          print(f"C# source files: {sum(p.lower().endswith('.cs') for p in written)}")
-          print(f"XAML files: {sum(p.lower().endswith('.xaml') for p in written)}")
-          PY
-
-      - name: Update repository README
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path("README.md")
-          text = p.read_text(encoding="utf-8")
-          old = "> **Status and scope:** The repository includes a ZIP archive of the software project. The instructions below describe the expected workflow, but should be checked against the exact files in the archive. Compatibility has not been established for every Revit release or Windows configuration."
-          new = "> **Source availability:** The Visual Studio source project is now available as browsable files in [repository root](./). The original ZIP archive is retained as the v1 software distribution."
-          if old in text:
-              text = text.replace(old, new)
-          else:
-              marker = "**RevitWindDrivenRain** is an Autodesk Revit add-in for geometry-resolved wind-driven rain (WDR) exposure assessment on building façades. It is designed to combine building geometry with a trajectory-based method to estimate and visualise spatial differences in façade exposure, within a workflow informed by ISO 15927-3."
-              if marker in text and "Source availability:" not in text:
-                  text = text.replace(marker, marker + "\n\n" + new)
-          build_old = "2. Extract the ZIP archive and open the supplied solution (`.sln`) or project (`.csproj`) file."
-          build_new = "2. Open [RevitWindDrivenRain.sln](RevitWindDrivenRain.sln) in Visual Studio. Alternatively, extract the ZIP archive and open the solution or project supplied there."
-          text = text.replace(build_old, build_new)
-          if "## Source code" not in text:
-              source_section = "\n## Source code\n\nThe browsable C# and WPF/XAML project files are available in [repository root](./). The solution file is [RevitWindDrivenRain.sln](RevitWindDrivenRain.sln). Generated Visual Studio folders and local build outputs are excluded.\n"
-              insert_at = text.find("\n## Main purpose")
-              if insert_at >= 0:
-                  text = text[:insert_at] + source_section + text[insert_at:]
-              else:
-                  text += source_section
-          p.write_text(text, encoding="utf-8")
-          PY
-
-      - name: Commit browsable source
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- \
-            App.config App.cs GreyscaleBitmapData.cs LICENSE.txt MaterialResistance.json \
-            "Command_Aesthetical Appearance" "Command_Ray Casting" Command_Simulations Command_WDR \
-            Forms Highlight Properties Resources Utilities "Test Codes" assets \
-            RevitWindDrivenRain.addin RevitWindDrivenRain.csproj RevitWindDrivenRain.sln \
-            NewWoodLCC.txt "NewWoodLCC - Copy.txt" SLE_PopupForm_Backup.cs \
-            SetProjectLocation_Backup.cs packages.config packages.config.new.20240425104046 \
-            .editorconfig .gitattributes .gitignore README.md
-          if git diff --cached --quiet; then
-            echo "No source changes to commit."
-            exit 0
-          fi
-          git commit -m "Add browsable RevitWindDrivenRain source project"
-          git push
+          test -f "source/RevitWindDrivenRain/RevitWindDrivenRain.sln"
+          test -f "source/RevitWindDrivenRain/RevitWindDrivenRain.csproj"
+          find "source/RevitWindDrivenRain" -type f -name '*.cs' -print -quit | grep -q .
+          echo "Source folder, Visual Studio solution, project file and C# source files are present."
