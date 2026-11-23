@@ -57,22 +57,17 @@ The software metadata for the archived version identifies the following target e
 
 ## Installation
 
-First determine whether the downloaded archive contains a **compiled add-in** or only the **source project**. These require different workflows.
+**This release contains source code only. It does not include a precompiled add-in assembly (`.dll`) ready to install in Revit.** The ZIP archive is a source-project archive, not an installer or compiled software package.
 
-### If the archive includes a compiled add-in
+To use the add-in, first build the source project in Visual Studio as described in [Building from source](#building-from-source). After a successful build, the resulting assembly and its dependencies must be installed and registered with Revit using a correctly configured `.addin` manifest.
 
-1. Close Autodesk Revit.
-2. Download and extract [RevitWindDrivenRain.zip](RevitWindDrivenRain.zip) or the matching archived release from [Zenodo](https://doi.org/10.5281/zenodo.17678839).
-3. Check for the add-in assembly (`.dll`), the Revit `.addin` manifest, and all required supporting DLLs/data files. Do not copy only the main DLL if the release includes dependencies.
-4. Follow the instructions supplied with the release for installing the assembly and manifest. For Revit 2023, the user add-ins folder is normally:
-   `%AppData%\Autodesk\Revit\Addins\2023\`
-5. Start Revit and check whether the add-in appears and loads. If it does not, review the assembly path, manifest, required DLLs, and target .NET framework.
+For Revit 2023, the per-user add-ins folder is normally:
 
-Do not create a manifest using guessed class names or paths; its values must match the actual compiled add-in.
+`%AppData%\Autodesk\Revit\Addins\2023\`
 
-### If the archive contains source code only
+The manifest must point to the actual built assembly and identify the correct add-in entry point. Do not assume that the repository's manifest is ready to use unchanged: inspect its assembly path and class/entry-point details, and update the path to match the location of your build output. Copy any required runtime dependencies alongside the assembly as appropriate.
 
-Follow the steps in [Building from source](#building-from-source). A source project must be compiled and installed before it can run in Revit.
+The repository does not provide a precompiled binary, so users must have a compatible Revit installation and development environment to build and run the software.
 
 ## Building from source
 
