@@ -45,15 +45,17 @@ Acquah, R., Niklewski, J., & Sandak, J. (2026). *BIM-based wind-driven rain mode
 
 ## Requirements and compatibility
 
-The software metadata for the archived version identifies the following target environment:
+The documented development environment for the archived software version is:
 
-- Windows
-- Autodesk Revit 2023
-- .NET Framework 4.8.1
-- Autodesk Revit API assemblies: `RevitAPI.dll` and `RevitAPIUI.dll`
-- C# and WPF/XAML
+- **Operating system:** Windows
+- **BIM application:** Autodesk Revit 2023
+- **Development language:** C#
+- **Target framework:** .NET Framework 4.8.1
+- **UI technology:** Windows Presentation Foundation (WPF)
+- **Revit dependencies:** `RevitAPI.dll` and `RevitAPIUI.dll`
+- **Additional dependencies:** External .NET libraries declared in the project configuration
 
-**Compatibility limitations:** RevitWindDrivenRain is a Revit add-in and relies on Autodesk Revit APIs and Windows-specific desktop UI technology. Native macOS support is not provided. Compatibility with Revit versions other than Revit 2023, or with other Windows/.NET configurations, has not been established and should not be assumed without testing.
+The source code is provided to support inspection, modification and adaptation to other Autodesk Revit releases. RevitWindDrivenRain relies on the Revit API and the .NET runtime supported by the target Revit version. Consequently, adapting the project to another release may require changes to the project configuration, API references, target framework, external dependencies and deployment settings.
 
 ## Installation
 
@@ -96,6 +98,27 @@ Package restoration generally requires internet access unless the required packa
 **Important distinction:** NuGet packages and Autodesk's Revit API assemblies are not the same thing. Restoring NuGet packages does not install Revit or provide `RevitAPI.dll` and `RevitAPIUI.dll`; users building the add-in need a compatible local Revit installation and the corresponding API references. Runtime dependencies required by the compiled add-in must also be available when the add-in is loaded.
 
 These instructions describe the general workflow. They do not by themselves establish that the supplied project builds successfully; a clean restore/build/test should be performed before treating it as verified.
+
+## Compatibility with other Revit versions
+
+The archived project is configured for Revit 2023. The source code may be adapted to other Revit versions, subject to the API and runtime requirements of the target release.
+
+For Revit versions that use .NET Framework, adaptation generally involves:
+
+1. Installing the target Revit version and its corresponding API development components.
+2. Updating the `RevitAPI.dll` and `RevitAPIUI.dll` references to the assemblies supplied with that version.
+3. Updating the project configuration and target framework where necessary.
+4. Reviewing API calls and external dependencies for version compatibility.
+5. Updating the add-in manifest and deployment paths.
+6. Rebuilding the project and testing its commands, calculations, geometry processing, data loading and visualisation in the target Revit version.
+
+Revit 2025 introduced a transition from .NET Framework to .NET 8. Add-ins targeting Revit 2025 or later therefore require a .NET 8-compatible build. Migration may involve converting the project configuration, reviewing WPF and Windows Forms components, updating external libraries and addressing changes in .NET and assembly loading. A single codebase can be maintained for multiple Revit releases using appropriate version-specific build configurations.
+
+These adaptation procedures describe how the source project can be prepared for other Revit versions. They do not imply that every version has been independently tested or that the original Revit 2023 build can be used unchanged in newer releases.
+
+## Operating-system support
+
+RevitWindDrivenRain uses Autodesk Revit and Windows-specific desktop technologies, including Windows Presentation Foundation (WPF). The software is intended for Windows environments that support the corresponding Autodesk Revit release and its required .NET runtime. Native macOS support is not provided. Running Windows and Revit through a virtualised environment on an Apple computer is a separate configuration and requires its own compatibility assessment.
 
 ## Inputs, outputs, and scientific use
 
